@@ -8,9 +8,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
-import { setTokens } from "@/app/api/LoginCookies"
 
-const key = process.env.NEXT_PUBLIC_KEY_SUPABASE
 
 const schema = z.object({
     email: z.email({ error: "The email is invalid." }),
@@ -26,12 +24,8 @@ export default function Page() {
     async function submit(data: DataForm) {
 
         const res = await Axios({
-            url: "https://myvyvaldnehjhnveuohs.supabase.co/auth/v1/token?grant_type=password",
+            url: "/api/login",
             method: "post",
-
-            headers: {
-                apikey: `${key}`
-            },
 
             body: {
                 email: data.email,
@@ -48,12 +42,8 @@ export default function Page() {
         mutationFn: submit,
 
 
-        onSuccess: async (data) => {
+        onSuccess: () => {
 
-            await setTokens({
-                refreshToken: data.refresh_token,
-                accessToken: data.access_token,
-            })
             router.replace("/shop/products")
 
         },
