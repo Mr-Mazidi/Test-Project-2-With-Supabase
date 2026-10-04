@@ -1,11 +1,12 @@
 import axios from "axios";
 
 type MethodType = "get" | "put" | "post" | "delete" | "patch"
+
 export async function Axios({ url, method, body, headers }: {
     url: string,
     method: MethodType,
-    body?: object | undefined,
-    headers?: Record<string, string> | undefined,
+    body?: object | FormData | File,
+    headers?: Record<string, string>,
 }) {
 
     const res = await axios.request({

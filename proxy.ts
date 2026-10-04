@@ -7,6 +7,7 @@ export function proxy(request: NextRequest) {
     const path = request.nextUrl.pathname
 
 
+
     if (!isLogin && !(path === "/auth/login" || path === "/auth/register")) {
 
         return NextResponse.redirect(new URL("/auth/login", request.url))
@@ -26,5 +27,6 @@ export const config = {
     matcher: [
         "/auth/:path*",
         "/shop/:path*",
+        "/profile/:path*",
     ]
 }

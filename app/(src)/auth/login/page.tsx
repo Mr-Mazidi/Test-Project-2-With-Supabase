@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
+import Loading from "@/app/loading"
+import { Textarea } from "@/app/components/Textarea"
 
 
 const schema = z.object({
@@ -54,17 +56,28 @@ export default function Page() {
     })
 
 
-    if (isPending) return <p>Loading ...</p>
+    if (isPending) return <Loading />
     return (
 
-        <div>
-            <form onSubmit={handleSubmit((data) => mutate(data))}>
+        <div className="w-full py-36 flex justify-center items-center">
+            <form className="
+            m-2 md:p-20
+            bg-white 
+            border-[1px] border-blue-200
+            rounded-3xl  
+            shadow-gray-500 shadow-md hover:shadow-xl
+            w-full md:max-w-4/6 min-h-96
+            flex flex-col justify-center items-center
+            gap-2 
+
+            " onSubmit={handleSubmit((data) => mutate(data))}>
 
                 <Input type="email" placeholder="Email" {...register("email")}></Input>
-                {errors.email && <p>{errors.email.message}</p>}
+                {errors.email && <p className="mb-2">{errors.email.message}</p>}
 
                 <Input type="password" placeholder="Password" {...register("password")}></Input>
-                {errors.password && <p>{errors.password.message}</p>}
+                {errors.password && <p className="mb-2">{errors.password.message}</p>}
+
 
                 <Button type="submit">Send</Button>
 

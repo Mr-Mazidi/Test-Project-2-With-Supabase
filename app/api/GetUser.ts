@@ -52,6 +52,7 @@ export async function GetUser() {
 
                 return {
                     success: true,
+                    message: "OK",
                     ...res
                 }
 
@@ -60,7 +61,9 @@ export async function GetUser() {
         }
 
         return {
-            success: false
+            success: false,
+            message: "Please try again"
+
         }
     }
 

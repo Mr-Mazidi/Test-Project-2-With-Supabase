@@ -2,27 +2,28 @@ import { ComponentProps } from "react"
 
 
 type ButttonType = ComponentProps<"button"> & {
-    size?: "sm" | "md" | "xl" | "not",
-    className?: string
+    size?: "sm" | "md" | "xl" | "not" | "button",
+    className?: string,
+    bg?: string,
 }
 
-export default function Button({ size = "md", className = "", children, ...props }: ButttonType) {
+export default function Button({ size = "md", bg = "", className = "", children, ...props }: ButttonType) {
 
     const Size = {
         sm: "px-2.5 py-1",
         md: "px-4.5 py-2",
         xl: "px-6.5 py-3",
+        button: "w-10 h-10 flex justify-center items-center rounded-full",
         not: ""
     }
 
     return (
 
         <button className={`
-        bg-blue-500
+       ${bg || "bg-blue-500"}
         cursor-pointer
         p-2
         rounded-md
-
 
         disabled:cursor-not-allowed
         disabled:opacity-50
@@ -35,8 +36,8 @@ export default function Button({ size = "md", className = "", children, ...props
             
         ${Size[size]}
         ${className}
-            
-        `}
+
+`}
             {...props}
         >
 

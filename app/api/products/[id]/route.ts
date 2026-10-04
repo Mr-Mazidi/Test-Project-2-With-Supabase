@@ -1,28 +1,37 @@
 import { NextResponse } from "next/server";
-import { Axios } from "../Axios";
-import { DeleteToken } from "../LoginCookies";
-import axios from "axios";
-import { RefreshAccessToken } from "../refreshAccessToken";
-import { redirect } from "next/navigation";
+import { Axios } from "../../Axios";
+import { isAxiosError } from "axios";
+import { RefreshAccessToken } from "../../refreshAccessToken";
 import { cookies } from "next/headers";
 
 const key = process.env.NEXT_PUBLIC_KEY_SUPABASE
-
-export async function GET() {
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
 
     const cookieStore = await cookies()
-    const accessToken = cookieStore.get("access_token")?.value
+    const accessToken = cookieStore.get("access-token")?.value
+    const { id } = await params
+    console.log(accessToken)
+    if (!Number(id)) {
+        return NextResponse.json({
+
+            success: false,
+            message: "This id products is invalid."
+
+        }, {
+            status: 500
+        })
+    }
 
     try {
         const res = await Axios({
-            url: "https://myvyvaldnehjhnveuohs.supabase.co/rest/v1/products",
-            method: "get",
 
+            url: `https://myvyvaldnehjhnveuohs.supabase.co/rest/v1/products?id=eq.${id}`,
+            method: "get",
             headers: {
                 apikey: `${key}`,
                 Authorization: `Bearer ${accessToken}`
-            }
 
+            }
         })
 
         return NextResponse.json({
@@ -30,13 +39,16 @@ export async function GET() {
             res,
             success: true,
             message: "successfully"
+
         }, {
+
             status: 200
+
         })
 
     } catch (error) {
 
-        if (axios.isAxiosError(error)) {
+        if (isAxiosError(error)) {
 
             if (error.response?.status === 401) {
 
@@ -46,51 +58,57 @@ export async function GET() {
                     cookieStore.set("access_token", newAccessToken)
 
                     const res = await Axios({
-                        url: "https://myvyvaldnehjhnveuohs.supabase.co/rest/v1/products?order=created_at.desc",
+                        url: `https://myvyvaldnehjhnveuohs.supabase.co/rest/v1/products?id=eq.${id}`,
                         method: "get",
-
                         headers: {
                             apikey: `${key}`,
                             Authorization: `Bearer ${newAccessToken}`
                         }
-
                     })
-
 
                     return NextResponse.json({
 
                         res,
                         success: true,
                         message: "successfully"
+
                     }, {
                         status: 200
                     })
 
                 } catch {
 
-                    await DeleteToken()
-                    redirect("/auth/login")
+                    return NextResponse.json({
+
+                        success: false,
+                        message: error.response?.data.message
+
+                    }, {
+                        status: error.response?.status
+                    })
 
                 }
             }
 
             return NextResponse.json({
 
-                message: error.response?.data?.message,
-                success: false
+                success: false,
+                message: error.response?.data.message
 
             }, {
-                status: error.response?.status || 500
+                status: error.response?.status
             })
 
         }
 
         return NextResponse.json({
-            message: "Unknown error",
+
+            success: false,
+            message: "Try again in a few minutes"
+
         }, {
             status: 500
         })
-
     }
 
 }
