@@ -1,5 +1,5 @@
 "use client"
-// محصولات حذف شده به طور خودکار با کمک سوپابیس و استفاده از corn محصولات که وضعیتشان false شده را حذف می کند
+// محصولات و سبد خرید هایی که پرداختشان عملی شده بعدی سی روز حذف می شود
 
 import Button from "./components/Button"
 import { useRouter } from "next/navigation"
@@ -8,7 +8,9 @@ import { BadgeCheck, BriefcaseBusiness, Heart, ShoppingBag, Tag, Truck } from "l
 import { DeleteToken } from "./api/LoginCookies"
 
 
-
+//register
+//edit products
+//database profile
 
 export default function Home() {
 

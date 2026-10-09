@@ -25,7 +25,7 @@ export default function CreateList({
                     <Image
                         onClick={() => setIsShowImage(true)}
                         fill
-                        src={imageError ? "/Image/photo.jpg" : `${image}`}
+                        src={imageError ? "/Image/photo.webp" : `${image}`}
                         alt={`Photo ${name}`}
                         onError={() => setImageError(true)}
                     />
@@ -61,7 +61,7 @@ export default function CreateList({
 
                     <div onClick={(e) => e.stopPropagation()} className="relative w-10/12 max-w-72 md:max-w-sm xl:max-w-md aspect-square">
 
-                        <Image className="rounded-3xl bg-black" src={image || "/Image/photo.jpg"} alt="Plaese try again" fill />
+                        <Image className="rounded-3xl bg-black" src={image || "/Image/photo.webp"} alt="Plaese try again" fill />
 
                     </div>
 

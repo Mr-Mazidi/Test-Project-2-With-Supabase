@@ -1,11 +1,11 @@
 "use client"
 
-
 import { Axios } from "@/app/api/Axios"
 import { useQuery } from "@tanstack/react-query"
 import CreateList from "./createListProducts"
 import { ProductsType } from "@/app/schema/TypeProducts"
 import Loading from "@/app/loading"
+import Error from "@/app/components/Error"
 
 
 export default function Page() {
@@ -26,9 +26,10 @@ export default function Page() {
 
 
     if (isPending || !data) return <Loading />
-    if (isError) return <p>Error ... </p>
+    if (isError) return <Error />
 
     const products = data.res
+
     return (
         <div className="w-full h-full py-32 flex justify-center">
 

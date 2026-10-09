@@ -282,7 +282,7 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
                     <div className="w-full aspect-square relative rounded-md overflow-hidden bg-gray-500 shadow-md shadow-gray-600">
 
-                        <Image src={product.image || "/Image/photo.jpg"} alt="Photo" fill className="object-contain" />
+                        <Image src={product.image || "/Image/photo.webp"} alt="Photo" fill className="object-contain" />
 
                     </div>
 

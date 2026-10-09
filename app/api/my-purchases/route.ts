@@ -56,7 +56,6 @@ export async function GET() {
 
         })
 
-
         return NextResponse.json({
             res,
             succes: true
@@ -88,8 +87,6 @@ export async function GET() {
 
                     }
                 })
-
-
                 return NextResponse.json({
                     res,
                     succes: true

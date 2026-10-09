@@ -25,7 +25,7 @@ export default function CreatePublicListProducts({
 
             <div className="relative w-11/12 aspect-square p-3 ml-3 flex justify-center items-center">
 
-                <Image className="rounded-3xl overflow-hidden" fill src={image || "/Image/photo.jpg"} alt={`Photo ${name}`} />
+                <Image className="rounded-3xl overflow-hidden" fill src={image || "/Image/photo.webp"} alt={`Photo ${name}`} />
 
             </div>
 

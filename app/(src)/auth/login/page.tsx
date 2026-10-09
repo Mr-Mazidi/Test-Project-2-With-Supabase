@@ -9,7 +9,7 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import Loading from "@/app/loading"
-import { Textarea } from "@/app/components/Textarea"
+import Link from "next/link"
 
 
 const schema = z.object({
@@ -59,7 +59,7 @@ export default function Page() {
     if (isPending) return <Loading />
     return (
 
-        <div className="w-full py-36 flex justify-center items-center">
+        <div className="w-full py-36 flex flex-col justify-center items-center">
             <form className="
             m-2 md:p-20
             bg-white 
@@ -81,9 +81,10 @@ export default function Page() {
 
                 <Button type="submit">Send</Button>
 
-            </form>
+                {true && <p className="pt-2 text-red-600">Plesse Try Again Later</p>}
 
-            {isError && <p>Error...</p>}
+            </form>
+            <p>Don`t you have an account?<Link href={"/auth/register"} className="text-blue-500">Click here</Link></p>
         </div>
     )
 }

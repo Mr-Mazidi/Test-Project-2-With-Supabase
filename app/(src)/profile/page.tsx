@@ -25,7 +25,7 @@ export default function Page() {
                     <label htmlFor="picture" className=" relative w-28 h-28
                       mt-20 rounded-full overflow-hidden">
 
-                        <Image src={urlProfile || "/Image/photoProfile.jpg"} alt="Picture" fill />
+                        <Image src={urlProfile || "/Image/photoProfile.webp"} alt="Picture" fill />
 
                     </label>
 

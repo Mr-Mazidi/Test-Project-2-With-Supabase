@@ -214,6 +214,7 @@ export default function Page() {
 
     const res: TypeRes = Data.res;
 
+
     return (
         <main className="min-h-screen bg-[radial-gradient(ellipse_at_top_left,#eef2ff_0%,transparent_45%),#f8fafc] px-4 pb-20 pt-32 text-slate-800 sm:px-6">
 
